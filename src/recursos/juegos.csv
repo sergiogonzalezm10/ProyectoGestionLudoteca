@@ -1,0 +1,6 @@
+1,1,1,1,1,true,TABLERO,false,4;5
+2,Monopoly,2,8,30,true,TABLERO,true,2
+3,Oca,2,4,10,true,TABLERO,false,3
+4,Hundir la flota,2,6,25,true,TABLERO,false,5
+5,Parchis,2,4,20,false,DADOS,4,1
+6,El Pueblo,2,8,45,true,ROL,Pueblo,3

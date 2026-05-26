@@ -92,9 +92,15 @@ public class Torneo {
 
     @Override
     public String toString() {
-        return "[" + id + "] " + nombre + " | Juego: " + juego.getTitulo()
-                + " | Fecha: " + fecha
-                + " | " + inscritos.size() + "/" + maxParticipantes + " participantes";
+        String estado = "";
+        if (this.fecha.isBefore(java.time.LocalDate.now())) {
+            estado = " [FINALIZADO]";
+        }
+        
+        String plazasInfo = " (Plazas: " + this.inscritos.size() + "/" + this.maxParticipantes + ")";
+        
+        return "Torneo #" + id + ": " + nombre + " | Juego: " + juego.getTitulo() + 
+                " | Fecha: " + fecha + plazasInfo + estado;
     }
 
     @Override

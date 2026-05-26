@@ -53,7 +53,7 @@ public class Prestamo {
      * @return true si el juego no ha sido devuelto.
      */
     public boolean estaActivo() {
-        return fechaDevolucionReal == null;
+        return this.fechaDevolucionReal == null;
     }
 
     /**

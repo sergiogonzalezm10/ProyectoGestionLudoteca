@@ -1,114 +1,102 @@
 package repositorio;
 
+import excepciones.SocioNoEncontradoException;
 import modelo.Buscable;
 import modelo.Socio;
-import excepciones.SocioNoEncontradoException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Repositorio que gestiona los socios de la ludoteca.
- * Utiliza un HashMap para acceso rápido por identificador.
+ * Repositorio encargado de gestionar el almacenamiento de los socios.
+ * Implementa la interfaz Buscable parametrizada para entidades de tipo Socio.
  *
  * @author Sergio González
  * @version 1.0
  */
 public class RepositorioSocios implements Buscable<Socio> {
 
-    /** Socios indexados por su identificador. */
+    /** Almacenamiento indexado de socios por su identificador único. */
     private HashMap<Integer, Socio> socios;
 
     /**
-     * Constructor por defecto.
-     * Inicializa el repositorio vacío.
+     * Constructor por defecto. Inicializa el mapa de almacenamiento.
      */
     public RepositorioSocios() {
         this.socios = new HashMap<>();
     }
 
     /**
-     * Añade un socio al repositorio.
+     * Añade un nuevo socio al almacenamiento.
      *
-     * @param socio Socio a añadir.
+     * @param socio Socio a registrar.
      */
     public void agregar(Socio socio) {
-        socios.put(socio.getId(), socio);
+        this.socios.put(socio.getId(), socio);
     }
 
     /**
-     * Elimina un socio del repositorio por su identificador.
+     * Elimina un socio del almacenamiento mediante su identificador.
      *
      * @param id Identificador del socio a eliminar.
-     * @throws SocioNoEncontradoException si el socio no existe.
+     * @throws SocioNoEncontradoException si el identificador no corresponde a ningún socio.
      */
     public void eliminar(int id) throws SocioNoEncontradoException {
-        if (!socios.containsKey(id)) {
-            throw new SocioNoEncontradoException("No existe ningún socio con id " + id);
+        if (!this.socios.containsKey(id)) {
+            throw new SocioNoEncontradoException("No se puede eliminar: el socio con ID " + id + " no existe.");
         }
-        socios.remove(id);
+        this.socios.remove(id);
     }
 
     /**
-     * Busca un socio por su identificador.
+     * Busca un socio registrado mediante su identificador único.
      *
      * @param id Identificador del socio.
-     * @return El socio encontrado.
-     * @throws SocioNoEncontradoException si el socio no existe.
+     * @return El socio que coincide con el identificador.
+     * @throws SocioNoEncontradoException si el identificador no existe en el sistema.
      */
     public Socio buscarPorId(int id) throws SocioNoEncontradoException {
-        if (!socios.containsKey(id)) {
-            throw new SocioNoEncontradoException("No existe ningún socio con id " + id);
+        if (!this.socios.containsKey(id)) {
+            throw new SocioNoEncontradoException("El socio con ID " + id + " no está registrado.");
         }
-        return socios.get(id);
+        return this.socios.get(id);
     }
 
     /**
-     * Busca socios cuyo nombre contenga el texto indicado.
+     * Busca socios cuyo nombre contenga la cadena proporcionada.
      *
-     * @param texto Texto a buscar en el nombre.
-     * @return Lista de socios que coinciden.
+     * @param texto Cadena de texto a buscar en los nombres de los socios.
+     * @return Lista de socios que cumplen el criterio de búsqueda.
      */
     @Override
     public List<Socio> buscarPorNombre(String texto) {
-        List<Socio> resultado = new ArrayList<>();
-        for (Socio socio : socios.values()) {
-            if (socio.getNombre().toLowerCase().contains(texto.toLowerCase())) {
-                resultado.add(socio);
-            }
-        }
-        return resultado;
+        String criterio = texto.toLowerCase();
+        return this.socios.values().stream()
+                .filter(s -> s.getNombre().toLowerCase().contains(criterio))
+                .collect(Collectors.toList());
     }
 
     /**
-     * Devuelve todos los socios del repositorio.
+     * Devuelve una lista con todos los socios registrados.
      *
-     * @return Lista con todos los socios.
+     * @return Lista completa de socios.
      */
     public List<Socio> listarTodos() {
-        return new ArrayList<>(socios.values());
+        return new ArrayList<>(this.socios.values());
     }
 
     /**
-     * Modifica un socio ya existente en el repositorio.
+     * Modifica los datos de un socio existente.
      *
      * @param socio Socio con los datos actualizados.
-     * @throws SocioNoEncontradoException si el socio no existe.
+     * @throws SocioNoEncontradoException si el socio no existe en el almacenamiento.
      */
     public void modificar(Socio socio) throws SocioNoEncontradoException {
-        if (!socios.containsKey(socio.getId())) {
-            throw new SocioNoEncontradoException("No existe ningún socio con id " + socio.getId());
+        if (!this.socios.containsKey(socio.getId())) {
+            throw new SocioNoEncontradoException("No se puede modificar: el socio no existe.");
         }
-        socios.put(socio.getId(), socio);
-    }
-
-    /**
-     * Devuelve el número de socios registrados.
-     *
-     * @return Número de socios.
-     */
-    public int getTotalSocios() {
-        return socios.size();
+        this.socios.put(socio.getId(), socio);
     }
 }

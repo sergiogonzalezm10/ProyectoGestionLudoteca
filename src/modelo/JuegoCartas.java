@@ -6,7 +6,7 @@ package modelo;
  * @author Sergio González
  * @version 1.0
  */
-public class JuegoCartas extends JuegoMesa implements Prestable {
+public class JuegoCartas extends JuegoMesa {
 
     /** Número de cartas que contiene el juego. */
     private int numCartas;
@@ -42,20 +42,6 @@ public class JuegoCartas extends JuegoMesa implements Prestable {
         return "Cartas (" + numCartas + " cartas)";
     }
 
-    @Override
-    public void prestar() {
-        setDisponible(false);
-    }
-
-    @Override
-    public void devolver() {
-        setDisponible(true);
-    }
-
-    @Override
-    public boolean estaDisponible() {
-        return isDisponible();
-    }
 
     /** @return El número de cartas del juego. */
     public int getNumCartas() { return numCartas; }

@@ -75,6 +75,16 @@ public class RepositorioPrestamos {
         }
         throw new JuegoNoDisponibleException("No existe ningún préstamo con id " + id);
     }
+    
+    /**
+     * Añade un préstamo directamente a la lista sin realizar comprobaciones de estado.
+     * Método de uso exclusivo para la persistencia de datos desde ficheros.
+     *
+     * @param prestamo Préstamo procedente del fichero de datos.
+     */
+    public void cargarDesdeFichero(Prestamo prestamo) {
+        this.prestamos.add(prestamo);
+    }
 
     /**
      * Devuelve todos los préstamos registrados.

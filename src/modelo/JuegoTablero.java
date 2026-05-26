@@ -6,7 +6,7 @@ package modelo;
  * @author Sergio González
  * @version 1.0
  */
-public class JuegoTablero extends JuegoMesa implements Prestable {
+public class JuegoTablero extends JuegoMesa {
 
     /** Indica si el juego incluye expansiones. */
     private boolean tieneExpansion;
@@ -46,20 +46,6 @@ public class JuegoTablero extends JuegoMesa implements Prestable {
         }
     }
 
-    @Override
-    public void prestar() {
-        setDisponible(false);
-    }
-
-    @Override
-    public void devolver() {
-        setDisponible(true);
-    }
-
-    @Override
-    public boolean estaDisponible() {
-        return isDisponible();
-    }
 
     /** @return true si el juego tiene expansión. */
     public boolean isTieneExpansion() { return tieneExpansion; }

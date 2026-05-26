@@ -6,7 +6,7 @@ package modelo;
  * @author Sergio González
  * @version 1.0
  */
-public class JuegoDados extends JuegoMesa implements Prestable {
+public class JuegoDados extends JuegoMesa{
 
     /** Número de dados que incluye el juego. */
     private int numDados;
@@ -40,21 +40,6 @@ public class JuegoDados extends JuegoMesa implements Prestable {
     @Override
     public String descripcionTipo() {
         return "Dados (" + numDados + " dados)";
-    }
-
-    @Override
-    public void prestar() {
-        setDisponible(false);
-    }
-
-    @Override
-    public void devolver() {
-        setDisponible(true);
-    }
-
-    @Override
-    public boolean estaDisponible() {
-        return isDisponible();
     }
 
     /** @return El número de dados del juego. */

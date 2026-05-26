@@ -10,7 +10,7 @@ import java.util.List;
  * @author Sergio González
  * @version 1.0
  */
-public abstract class JuegoMesa implements Puntuable {
+public abstract class JuegoMesa implements Puntuable, Prestable {
 
     /** Identificador único del juego. */
     private int id;
@@ -132,6 +132,23 @@ public abstract class JuegoMesa implements Puntuable {
     /** @return La lista de puntuaciones recibidas. */
     public List<Integer> getPuntuaciones() { return puntuaciones; }
 
+    @Override
+    public void prestar() {
+        this.disponible = false;
+        this.setDisponible(false);
+    }
+
+    @Override
+    public void devolver() {
+        this.disponible = true;
+        this.setDisponible(true);
+    }
+
+    @Override
+    public boolean estaDisponible() {
+        return this.isDisponible();
+    }
+    
     @Override
     public String toString() {
         String estado;

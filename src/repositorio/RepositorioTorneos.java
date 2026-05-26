@@ -1,103 +1,81 @@
 package repositorio;
 
-import modelo.Socio;
-import modelo.Torneo;
 import excepciones.SocioNoEncontradoException;
 import excepciones.TorneoLlenoException;
+import modelo.Socio;
+import modelo.Torneo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Repositorio que gestiona los torneos de la ludoteca.
- * Utiliza un TreeSet para mantener los torneos ordenados por fecha.
+ * Repositorio encargado de gestionar el almacenamiento de los torneos.
+ * Los datos se mantienen ordenados por su fecha de celebración de forma estructural.
  *
  * @author Sergio González
  * @version 1.0
  */
 public class RepositorioTorneos {
 
-    /** Torneos ordenados por fecha de celebración. */
-    private TreeSet<Torneo> torneos;
+    /** Almacenamiento estructurado de torneos ordenados por fecha. */
+    private Set<Torneo> torneos;
 
     /**
-     * Constructor por defecto.
-     * Inicializa el repositorio vacío con ordenación por fecha.
+     * Constructor por defecto. Inicializa la colección con un criterio de ordenación.
      */
     public RepositorioTorneos() {
-        this.torneos = new TreeSet<>(new Comparator<Torneo>() {
-            @Override
-            public int compare(Torneo t1, Torneo t2) {
-                int resultado = t1.getFecha().compareTo(t2.getFecha());
-                if (resultado == 0) {
-                    return Integer.compare(t1.getId(), t2.getId());
-                }
-                return resultado;
-            }
-        });
+        this.torneos = new TreeSet<>(Comparator.comparing(Torneo::getFecha)
+                .thenComparing(Torneo::getId));
     }
 
     /**
-     * Añade un torneo al repositorio.
+     * Añade un nuevo torneo al almacenamiento.
      *
-     * @param torneo Torneo a añadir.
+     * @param torneo Torneo a registrar.
      */
     public void agregar(Torneo torneo) {
-        torneos.add(torneo);
+        this.torneos.add(torneo);
     }
 
     /**
-     * Busca un torneo por su identificador.
+     * Inscribe a un socio en un torneo específico tras realizar las validaciones básicas.
      *
-     * @param id Identificador del torneo.
-     * @return El torneo encontrado, o null si no existe.
+     * @param idTorneo Identificador del torneo objetivo.
+     * @param socio    Socio que solicita la inscripción.
+     * @throws TorneoLlenoException       si las plazas del torneo están cubiertas.
+     * @throws SocioNoEncontradoException si la entidad del socio contiene datos no válidos.
      */
-    public Torneo buscarPorId(int id) {
-        for (Torneo t : torneos) {
-            if (t.getId() == id) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Inscribe a un socio en un torneo.
-     *
-     * @param idTorneo Identificador del torneo.
-     * @param socio    Socio a inscribir.
-     * @throws TorneoLlenoException          si el torneo no tiene plazas.
-     * @throws SocioNoEncontradoException    si el torneo no existe.
-     */
-    public void inscribirSocio(int idTorneo, Socio socio)
+    public void inscribirSocio(int idTorneo, Socio socio) 
             throws TorneoLlenoException, SocioNoEncontradoException {
         Torneo torneo = buscarPorId(idTorneo);
         if (torneo == null) {
-            throw new SocioNoEncontradoException("No existe ningún torneo con id " + idTorneo);
-        }
-        if (!torneo.tienePlazas()) {
-            throw new TorneoLlenoException("El torneo '" + torneo.getNombre() + "' está lleno.");
+            throw new IllegalArgumentException("No existe ningún torneo con el identificador: " + idTorneo);
         }
         torneo.inscribirSocio(socio);
     }
 
     /**
-     * Devuelve todos los torneos ordenados por fecha.
+     * Busca un torneo registrado mediante su identificador único.
      *
-     * @return Lista de torneos ordenados.
+     * @param id Identificador del torneo.
+     * @return El torneo que coincide con el identificador o null si no se encuentra.
      */
-    public List<Torneo> listarTodos() {
-        return new ArrayList<>(torneos);
+    public Torneo buscarPorId(int id) {
+        return this.torneos.stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     /**
-     * Devuelve el número total de torneos registrados.
+     * Devuelve una lista con todos los torneos registrados en el sistema.
      *
-     * @return Número de torneos.
+     * @return Lista de torneos ordenados por fecha.
      */
-    public int getTotalTorneos() {
-        return torneos.size();
+    public List<Torneo> listarTodos() {
+        return new ArrayList<>(this.torneos);
     }
 }

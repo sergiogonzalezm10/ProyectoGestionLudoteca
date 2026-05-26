@@ -6,7 +6,7 @@ package modelo;
  * @author Sergio González
  * @version 1.0
  */
-public class JuegoRol extends JuegoMesa implements Prestable {
+public class JuegoRol extends JuegoMesa{
 
     /** Ambientación o temática del juego de rol. */
     private String ambientacion;
@@ -40,21 +40,6 @@ public class JuegoRol extends JuegoMesa implements Prestable {
     @Override
     public String descripcionTipo() {
         return "Rol (" + ambientacion + ")";
-    }
-
-    @Override
-    public void prestar() {
-        setDisponible(false);
-    }
-
-    @Override
-    public void devolver() {
-        setDisponible(true);
-    }
-
-    @Override
-    public boolean estaDisponible() {
-        return isDisponible();
     }
 
     /** @return La ambientación del juego de rol. */
