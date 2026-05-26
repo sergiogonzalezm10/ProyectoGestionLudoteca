@@ -41,12 +41,12 @@ public class ServicioSocios {
      * Elimina a un socio del sistema a partir de su identificador único.
      *
      * @param id Identificador único del socio a dar de baja.
-     * @throws SocioNoEncontradoException Si no existe ningún socio registrado con el ID proporcionado.
+     * @throws SocioNoEncontradoException si no existe ningún socio con ese identificador.
      */
     public void eliminar(int id) throws SocioNoEncontradoException {
         this.repositorioSocios.eliminar(id);
     }
-
+    
     /**
      * Modifica o actualiza la información existente de un socio en el sistema.
      *

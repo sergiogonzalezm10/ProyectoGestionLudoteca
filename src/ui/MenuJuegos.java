@@ -36,7 +36,7 @@ public class MenuJuegos {
      * Muestra el menú de juegos y gestiona la navegación.
      * @throws JuegoNoDisponibleException 
      */
-    public void mostrar() throws JuegoNoDisponibleException {
+    public void mostrar(){
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("\n--- GESTIÓN DE JUEGOS ---");
@@ -96,7 +96,7 @@ public class MenuJuegos {
         System.out.print("Id: ");
         int id = leerEntero();
         
-        // Uso de la clase genérica para comprobar duplicados
+        // Comprobar si ya existe un juego con ese id
         ResultadoSistema<JuegoMesa> verificacion = servicioJuegos.buscarJuegoConEstado(id);
         if (verificacion.getContenido() != null) {
             System.out.println("Error: Ya existe un juego registrado con el ID " + id + ".");

@@ -33,9 +33,7 @@ public class MenuPrincipal {
     private Scanner scanner;
 
     /**
-     * Constructor por parámetros de la clase MenuPrincipal.
-     * Inicializa los servicios correspondientes a partir de sus repositorios
-     * y sincroniza los contadores de identificadores necesarios.
+     * Constructor que inicializa los servicios y el scanner.
      *
      * @param repoJuegos     Repositorio que contiene los datos de los juegos.
      * @param repoSocios     Repositorio que contiene los datos de los socios.

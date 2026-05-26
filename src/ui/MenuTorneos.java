@@ -122,7 +122,7 @@ public class MenuTorneos {
      * Solicita los datos e inscribe a un socio en un torneo.
      * @throws SocioNoEncontradoException
      */
-    private void inscribirSocio() throws SocioNoEncontradoException {
+    private void inscribirSocio() throws SocioNoEncontradoException{
         System.out.print("Id del torneo: ");
         int idTorneo = leerEntero();
         System.out.print("Id del socio: ");

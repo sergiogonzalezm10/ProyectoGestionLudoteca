@@ -92,7 +92,7 @@ public class ServicioTorneos {
     public List<Torneo> listarConPlazas() {
         LocalDate hoy = LocalDate.now();
         return repositorioTorneos.listarTodos().stream()
-                .filter(t -> !t.getFecha().isBefore(hoy)) // Filtra que NO sea menor a hoy
+                .filter(t -> !t.getFecha().isBefore(hoy))
                 .filter(Torneo::tienePlazas)
                 .collect(Collectors.toList());
     }
@@ -106,7 +106,7 @@ public class ServicioTorneos {
     public List<Torneo> listarFuturos() {
         LocalDate hoy = LocalDate.now();
         return repositorioTorneos.listarTodos().stream()
-                .filter(t -> !t.getFecha().isBefore(hoy)) // Filtra que NO sea menor a hoy
+                .filter(t -> !t.getFecha().isBefore(hoy))
                 .sorted(Comparator.comparing(Torneo::getFecha))
                 .collect(Collectors.toList());
     }

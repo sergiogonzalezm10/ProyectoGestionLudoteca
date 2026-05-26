@@ -29,38 +29,38 @@ public class Main {
      * @throws JuegoNoDisponibleException 
      */
     public static void main(String[] args) throws SocioNoEncontradoException, JuegoNoDisponibleException {
-        // 1. Inicialización de la capa de almacenamiento (Repositorios)
+    	// Crear repositorios
         RepositorioJuegos repoJuegos = new RepositorioJuegos();
         RepositorioSocios repoSocios = new RepositorioSocios();
         RepositorioPrestamos repoPrestamos = new RepositorioPrestamos();
         RepositorioTorneos repoTorneos = new RepositorioTorneos();
 
-        // 2. Inicialización de la capa de persistencia externa
+        // Crear el gestor de ficheros
         GestorCSV gestorCSV = new GestorCSV();
 
         System.out.println("Cargando base de datos de la ludoteca...");
         
-        // 3. Carga secuencial de ficheros respetando las restricciones de integridad
+        // Cargar datos de los ficheros CSV
         gestorCSV.cargarJuegos(repoJuegos);
         gestorCSV.cargarSocios(repoSocios);
         gestorCSV.cargarPrestamos(repoPrestamos, repoJuegos, repoSocios);
         gestorCSV.cargarTorneos(repoTorneos, repoJuegos);
 
-        // 4. Inicialización de servicios intermedios que requieren sincronización de ID
+        // Crear servicios
         ServicioPrestamos servicioPrestamos = new ServicioPrestamos(repoPrestamos);
         ServicioTorneos servicioTorneos = new ServicioTorneos(repoTorneos);
 
-        // 5. Sincronización estructural de los contadores autoincrementales
+        // Sincronizar contadores de id
         servicioPrestamos.sincronizarContadorId();
         servicioTorneos.sincronizarContadorId();
 
         System.out.println("Datos cargados correctamente.");
 
-        // 6. Configuración y ejecución de la interfaz de usuario por consola
+        // Lanzar el menú principal
         MenuPrincipal menu = new MenuPrincipal(repoJuegos, repoSocios, repoPrestamos, repoTorneos);
         menu.mostrar();
 
-        // 7. Persistencia final del estado de la memoria a los ficheros del sistema tras cerrar el menú
+        // Guardar datos al cerrar
         System.out.println("\nGuardando cambios en el sistema de ficheros...");
         gestorCSV.guardarJuegos(repoJuegos);
         gestorCSV.guardarSocios(repoSocios);

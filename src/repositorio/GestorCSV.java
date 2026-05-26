@@ -58,20 +58,34 @@ public class GestorCSV {
      * @param repositorio Repositorio donde se agregarán los juegos cargados con éxito.
      */
     public void cargarJuegos(RepositorioJuegos repositorio) {
-        if (!Files.exists(Paths.get(RUTA_JUEGOS))) return;
-        try (BufferedReader br = new BufferedReader(new FileReader(RUTA_JUEGOS))) {
+        if (!Files.exists(Paths.get(RUTA_JUEGOS))) {
+            return;
+        }
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(RUTA_JUEGOS));
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (!linea.trim().isEmpty()) {
                     JuegoMesa juego = lineaAJuego(linea);
-                    if (juego != null) repositorio.agregar(juego);
+                    if (juego != null) {
+                        repositorio.agregar(juego);
+                    }
                 }
             }
         } catch (IOException e) {
             System.out.println("Error al cargar juegos: " + e.getMessage());
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    System.out.println("Error al cerrar el fichero: " + e.getMessage());
+                }
+            }
         }
     }
-
+    
     /**
      * Exporta la información de los socios de la ludoteca desde el repositorio hacia el fichero CSV.
      * Si la colección está vacía, el proceso se omite de forma segura.

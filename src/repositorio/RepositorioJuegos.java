@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Repositorio encargado de gestionar el almacenamiento de los juegos de mesa.
- * Implementa la interfaz Buscable parametrizada para entidades de tipo JuegoMesa.
- *
+ * Repositorio que gestiona el catálogo de juegos de la ludoteca.
  * @author Sergio González
  * @version 1.0
  */

@@ -77,8 +77,7 @@ public class RepositorioPrestamos {
     }
     
     /**
-     * Añade un préstamo directamente a la lista sin realizar comprobaciones de estado.
-     * Método de uso exclusivo para la persistencia de datos desde ficheros.
+     * Carga un préstamo desde fichero sin validar disponibilidad.
      *
      * @param prestamo Préstamo procedente del fichero de datos.
      */
