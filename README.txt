@@ -54,9 +54,9 @@ src/recursos/
  ├── prestamos.csv
  └── torneos.csv
 
-docProyectoFinal/               <- Javadoc generado
-ProyectoFinalUML.pdf   <- Diagrama UML
-Memoria_González.pdf <- Memoria técnica
+doc/               	<- Javadoc generado
+ProyectoFinalUML.pdf    <- Diagrama UML
+Memoria_González.pdf    <- Memoria técnica
 
 --------------------------------------
 NOTAS
