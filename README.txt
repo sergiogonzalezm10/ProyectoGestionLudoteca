@@ -56,7 +56,7 @@ src/recursos/
 
 docProyectoFinal/               <- Javadoc generado
 ProyectoFinalUML.pdf   <- Diagrama UML
-MemoriaProyectoFinal.pdf <- Memoria técnica
+Memoria_González.pdf <- Memoria técnica
 
 --------------------------------------
 NOTAS

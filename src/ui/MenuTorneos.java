@@ -56,8 +56,9 @@ public class MenuTorneos {
 
     /**
      * Muestra el menú de torneos y gestiona la navegación.
-     * @throws SocioNoEncontradoException 
-     */
+     * @throws SocioNoEncontradoException Si durante la inscripción se introduce el ID de un socio que no existe.
+     *      
+    */
     public void mostrar() throws SocioNoEncontradoException {
         int opcion = -1;
         while (opcion != 0) {

@@ -12,8 +12,6 @@ import java.util.List;
 
 /**
  * Clase encargada de la persistencia de datos en ficheros planos con formato CSV.
- * Mapea las colecciones de los repositorios hacia ficheros físicos y viceversa,
- * garantizando la conservación de la información entre ejecuciones del sistema.
  *
  * @author Sergio González
  * @version 1.0
@@ -313,7 +311,6 @@ public class GestorCSV {
             if (juego != null) {
                 juego.setDisponible(disponible);
                 
-                // Cargar notas si existen en la columna 9
                 if (p.length > 8) {
                     String puntuacionesStr = p[8].trim();
                     if (!puntuacionesStr.equals("SIN_NOTAS") && !puntuacionesStr.isEmpty()) {
