@@ -54,11 +54,8 @@ public class MenuPrincipal {
     /**
      * Muestra la interfaz del menú principal por consola y gestiona la navegación 
      * hacia los distintos submenús del sistema según la opción seleccionada.
-     *
-     * @throws SocioNoEncontradoException   Si ocurre un error al intentar acceder a un socio inexistente.
-     * @throws JuegoNoDisponibleException Si ocurre un error al intentar operar con un juego no disponible.
      */
-    public void mostrar() throws SocioNoEncontradoException, JuegoNoDisponibleException {
+    public void mostrar() {
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("\n========================================");
