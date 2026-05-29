@@ -56,10 +56,9 @@ public class MenuTorneos {
 
     /**
      * Muestra el menú de torneos y gestiona la navegación.
-     * @throws SocioNoEncontradoException Si durante la inscripción se introduce el ID de un socio que no existe.
      *      
     */
-    public void mostrar() throws SocioNoEncontradoException {
+    public void mostrar() {
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("\n--- GESTIÓN DE TORNEOS ---");
@@ -121,9 +120,8 @@ public class MenuTorneos {
 
     /**
      * Solicita los datos e inscribe a un socio en un torneo.
-     * @throws SocioNoEncontradoException
      */
-    private void inscribirSocio() throws SocioNoEncontradoException{
+    private void inscribirSocio(){
         System.out.print("Id del torneo: ");
         int idTorneo = leerEntero();
         System.out.print("Id del socio: ");
@@ -156,7 +154,7 @@ public class MenuTorneos {
         try {
             servicioTorneos.inscribirSocio(idTorneo, socioAInscribir);
             System.out.println("Socio inscrito correctamente.");
-        } catch (TorneoLlenoException | IllegalArgumentException e) {
+        } catch (TorneoLlenoException | SocioNoEncontradoException | IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }

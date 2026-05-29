@@ -55,7 +55,7 @@ src/recursos/
  └── torneos.csv
 
 doc/               	<- Javadoc generado
-ProyectoFinalUML.pdf    <- Diagrama UML
+UML_González.pdf    <- Diagrama UML
 Memoria_González.pdf    <- Memoria técnica
 
 --------------------------------------
